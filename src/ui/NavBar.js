@@ -4,7 +4,7 @@ import UserContext from '../context/UserContext';
 const NavBar = () => {
     const {user:{user}}  = useContext(UserContext);
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div className="container-fluid">
                 <NavLink exact activeClassName="active" className="navbar-brand" to="#">Asociaciones</NavLink>
                 <div className="collapse navbar-collapse" id="navbarText">
@@ -14,6 +14,9 @@ const NavBar = () => {
                         </li>
                         <li className="nav-item">
                             <NavLink exact activeClassName="active" className="nav-link" to="/dc">DC</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink exact activeClassName="active" className="nav-link" to="/buscar">Buscar</NavLink>
                         </li>
                     </ul>
                     <span className="navbar-text">
