@@ -6,7 +6,7 @@ const NavBar = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div className="container-fluid">
-                <NavLink exact activeClassName="active" className="navbar-brand" to="#">Asociaciones</NavLink>
+                <NavLink exact activeClassName="active" className="navbar-brand" to="#">HEROES APP</NavLink>
                 <div className="collapse navbar-collapse" id="navbarText">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
