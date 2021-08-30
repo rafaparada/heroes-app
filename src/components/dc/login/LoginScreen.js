@@ -1,16 +1,19 @@
 import { useContext,useState } from "react";
-import UserContext from "../../../context/UserContext";
+import { AuthContext } from "../../../context/AuthContext";
+import types from '../../../types';
 const LoginScreen = ({history}) => {
-    const {setUser}= useContext(UserContext);
-    const [data,setData]=useState({user:'',password:''});
+    const {dispatch}= useContext(AuthContext);
+    const [data,setData]=useState({user:'',logged:true});
+    
     const handleForm = e =>{
        const newData = {...data};
        newData[e.target.name] = e.target.value;
        setData(newData);
     }
     const autenticar = () =>{
-        setUser(data);
+        dispatch({payload:data,type:types.login});
         history.replace("/dc");
+        localStorage.setItem('user',JSON.stringify({user:data}));
     }
     return (
         <div className="container mt-4">
@@ -25,7 +28,7 @@ const LoginScreen = ({history}) => {
                             Usuario:
                             <input type="text" onChange={handleForm} name="user" className="form-control" />
                             Password:
-                            <input type="password" onChange={handleForm} name="password" className="form-control" />
+                            <input type="password" className="form-control" />
                         </div>
                         <div className="card-footer text-center">
                             <button className="btn btn-primary" onClick={()=>autenticar()}>Entrar</button>

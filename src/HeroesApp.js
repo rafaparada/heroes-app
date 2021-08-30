@@ -1,12 +1,17 @@
 import AppRouter from "./routers/AppRouter";
-import UserContext from "./context/UserContext";
-import { useState } from "react";
+import { AuthContext } from "./context/AuthContext";
+import { useReducer} from "react";
+import authReducer from "./authReducer/authReducer";
+const init = () => {
+    return JSON.parse(localStorage.getItem('user'))||{logged:false};
+}
+
 const HeroesApp =()=> {
-    const [user,setUser] = useState({});
+    const [user,dispatch] = useReducer(authReducer,{},init);
     return (
-        <UserContext.Provider value={{user,setUser}}>
+        <AuthContext.Provider value={{user,dispatch}}>
             <AppRouter />
-        </UserContext.Provider>
+        </AuthContext.Provider>
     );
 }
 

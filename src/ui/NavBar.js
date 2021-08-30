@@ -1,8 +1,15 @@
 import React,{useContext} from 'react'
-import { NavLink } from 'react-router-dom/cjs/react-router-dom.min'
-import UserContext from '../context/UserContext';
+import { NavLink,useHistory } from 'react-router-dom'
+import { AuthContext } from '../context/AuthContext';
+import types from '../types';
 const NavBar = () => {
-    const {user:{user}}  = useContext(UserContext);
+    const {user:{user},dispatch}  = useContext(AuthContext);
+    const history = useHistory();
+    const hanldeLogout = () =>{
+        localStorage.removeItem('user');
+        dispatch({type:types.logout,logged:false});
+        history.replace("/login");
+    }
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div className="container-fluid">
@@ -19,9 +26,7 @@ const NavBar = () => {
                             <NavLink exact activeClassName="active" className="nav-link" to="/buscar">Buscar</NavLink>
                         </li>
                     </ul>
-                    <span className="navbar-text">
-                        <NavLink exact activeClassName="active" className="nav-link" to="/login">{`[${user}] Logout`}</NavLink>
-                    </span>
+                    <span className="navbar-text" onClick={hanldeLogout}>{`[${user.name}] Logout`}</span>
                 </div>
             </div>
         </nav>
