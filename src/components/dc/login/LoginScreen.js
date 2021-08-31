@@ -3,17 +3,16 @@ import { AuthContext } from "../../../context/AuthContext";
 import types from '../../../types';
 const LoginScreen = ({history}) => {
     const {dispatch}= useContext(AuthContext);
-    const [data,setData]=useState({user:'',logged:true});
+    const [name,setName]=useState();
     
     const handleForm = e =>{
-       const newData = {...data};
-       newData[e.target.name] = e.target.value;
-       setData(newData);
+        setName(e.target.value);
     }
     const autenticar = () =>{
-        dispatch({payload:data,type:types.login});
+        const action = {type:types.login,payload:{name:name,logged:true}};
+        dispatch(action);
+        localStorage.setItem('user',JSON.stringify({name:name,logged:true}));
         history.replace("/dc");
-        localStorage.setItem('user',JSON.stringify({user:data}));
     }
     return (
         <div className="container mt-4">

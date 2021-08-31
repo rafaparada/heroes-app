@@ -3,11 +3,11 @@ import { NavLink,useHistory } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext';
 import types from '../types';
 const NavBar = () => {
-    const {user:{user},dispatch}  = useContext(AuthContext);
+    const {user,dispatch}  = useContext(AuthContext);
     const history = useHistory();
     const hanldeLogout = () =>{
         localStorage.removeItem('user');
-        dispatch({type:types.logout,logged:false});
+        dispatch({type:types.logout,payload:{user:{logged:false}}});
         history.replace("/login");
     }
     return (
